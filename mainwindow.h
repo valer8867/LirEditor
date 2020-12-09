@@ -33,5 +33,8 @@ protected:
     // QWidget interface
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
+private slots:
+    void on_close_pushButton_clicked();
+    void on_tri_pushButton_clicked();
 };
 #endif // MAINWINDOW_H

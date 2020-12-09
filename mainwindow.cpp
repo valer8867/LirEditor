@@ -41,3 +41,15 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
         move(pos() + moveMouseEvent->pos() - startPos);
     }
 }
+
+
+
+void MainWindow::on_close_pushButton_clicked()
+{
+      this->close();
+}
+
+void MainWindow::on_tri_pushButton_clicked()
+{
+    setWindowState(Qt::WindowState::WindowMinimized);
+}
