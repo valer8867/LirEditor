@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+class QListWidgetItem;
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -36,5 +38,6 @@ protected:
 private slots:
     void on_close_pushButton_clicked();
     void on_tri_pushButton_clicked();
+    void on_listWidget_itemClicked(QListWidgetItem *item);
 };
 #endif // MAINWINDOW_H
