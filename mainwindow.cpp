@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QListWidgetItem>
 #include <QTextEdit>
+#include <QInputDialog>
 
 #include <iostream>
 #include <fstream>
@@ -16,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     , mousePressed(false)
 {
     ui->setupUi(this);
+
     //assume the directory exists and contains some files and you want all jpg and JPG files
     QDir directory("Data");
     QStringList shits = directory.entryList(QStringList() << "*.txt" << "*.TXT", QDir::Files);
@@ -55,6 +57,18 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     }
 }
 
+void MainWindow::loadTextEditor()
+{
+    ui->widget->hide();
+    auto textEditor = new QTextEdit();
+    textEditor->setLineWrapMode(QTextEdit::LineWrapMode::NoWrap);
+    textEditor->setFrameShape(QTextEdit::NoFrame);
+    textEditor->setStyleSheet("background: rgb(234, 234, 234)");
+    textEditor->setFont (QFont ("Arial", 10));
+    ui->centralwidget->layout()->addWidget(textEditor);
+    m_textEditor = textEditor;
+}
+
 
 
 void MainWindow::on_close_pushButton_clicked()
@@ -69,20 +83,11 @@ void MainWindow::on_tri_pushButton_clicked()
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
+    loadTextEditor();
     auto name = item->text();
     std::ifstream fin(std::string("data/") + name.toStdString());
     auto content = std::string(std::istreambuf_iterator<char>(fin), std::istreambuf_iterator<char>());
-
-    ui->widget->close();
-    auto textEditor = new QTextEdit();
-    textEditor->setLineWrapMode(QTextEdit::LineWrapMode::NoWrap);
-    textEditor->setFrameShape(QTextEdit::NoFrame);
-    textEditor->setStyleSheet("background: rgb(234, 234, 234)");
-
-    textEditor->setText(content.c_str());
-    textEditor->setFont (QFont ("Arial", 10));
-
-    ui->centralwidget->layout()->addWidget(textEditor);
+    m_textEditor->setText(content.c_str());
 }
 
 void MainWindow::on_topHint_pushButton_clicked()
@@ -96,4 +101,23 @@ void MainWindow::on_topHint_pushButton_clicked()
     }
 
     show();
+}
+
+void MainWindow::on_createNew_pushButton_clicked()
+{
+    bool ok;
+    auto fileName = QInputDialog::getText(this, tr("New sheet"), tr("Name:"), QLineEdit::Normal, nullptr, &ok);
+    if (ok && !fileName.isEmpty()){
+
+        loadTextEditor();
+    }
+
+}
+
+void MainWindow::on_home_pushButton_clicked()
+{
+    if (m_textEditor) {
+        m_textEditor->hide();
+        ui->widget->show();
+    }
 }

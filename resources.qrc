@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="save_icon">resources/icons/save.png</file>
+        <file alias="pin_icon">resources/icons/pin.png</file>
+        <file alias="home_icon">resources/icons/home.png</file>
+    </qresource>
+</RCC>
