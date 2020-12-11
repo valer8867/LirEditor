@@ -39,5 +39,6 @@ private slots:
     void on_close_pushButton_clicked();
     void on_tri_pushButton_clicked();
     void on_listWidget_itemClicked(QListWidgetItem *item);
+    void on_topHint_pushButton_clicked();
 };
 #endif // MAINWINDOW_H

@@ -76,7 +76,24 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     ui->widget->close();
     auto textEditor = new QTextEdit();
     textEditor->setLineWrapMode(QTextEdit::LineWrapMode::NoWrap);
+    textEditor->setFrameShape(QTextEdit::NoFrame);
+    textEditor->setStyleSheet("background: rgb(234, 234, 234)");
+
     textEditor->setText(content.c_str());
-    textEditor->setFont (QFont ("Courier", 11));
+    textEditor->setFont (QFont ("Arial", 10));
+
     ui->centralwidget->layout()->addWidget(textEditor);
+}
+
+void MainWindow::on_topHint_pushButton_clicked()
+{
+
+    if (windowFlags() & Qt::WindowStaysOnTopHint) {
+        setWindowFlag(Qt::WindowStaysOnTopHint, false);
+    }
+    else {
+        setWindowFlag(Qt::WindowStaysOnTopHint);
+    }
+
+    show();
 }
