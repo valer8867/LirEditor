@@ -19,11 +19,13 @@ SOURCES += \
     crafttable.cpp \
     main.cpp \
     mainwindow.cpp \
+    mylistwidget.cpp \
     safetexteditor.cpp
 
 HEADERS += \
     crafttable.h \
     mainwindow.h \
+    mylistwidget.h \
     safetexteditor.h
 
 FORMS += \

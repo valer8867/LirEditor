@@ -6,10 +6,14 @@
 #include <QListWidgetItem>
 #include <QTextEdit>
 #include <QInputDialog>
+#include <QShortcut>
+#include <QTimer>
+#include <QMessageBox>
 
 #include <iostream>
 #include <fstream>
 
+#include "safetexteditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -18,12 +22,22 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //assume the directory exists and contains some files and you want all jpg and JPG files
-    QDir directory("Data");
-    QStringList shits = directory.entryList(QStringList() << "*.txt" << "*.TXT", QDir::Files);
-    foreach(QString filename, shits) {
-        ui->listWidget->addItem(filename);
-    }
+    m_textEditor = new SafeTextEditor();
+    m_textEditor->hide();
+    ui->centralwidget->layout()->addWidget(m_textEditor);
+
+    updateList();
+
+    keyEsc = new QShortcut(this);
+    keyEsc->setKey(Qt::Key_Escape);
+    connect(keyEsc, &QShortcut::activated, this, &MainWindow::keyEsc_pressed);
+
+    keyDel = new QShortcut(this);
+    keyDel->setKey(Qt::Key_Delete);
+    connect(keyDel, &QShortcut::activated, this, &MainWindow::keyDel_pressed);
+
+
+    QTimer::singleShot(1000, this, &MainWindow::timer_shot);
 }
 
 MainWindow::~MainWindow()
@@ -57,23 +71,32 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     }
 }
 
-void MainWindow::loadTextEditor()
+void MainWindow::updateList()
+{
+
+    QDir directory("Data");
+    QStringList shits = directory.entryList(QStringList() << "*.txt" << "*.TXT", QDir::Files);
+    ui->listWidget->clear();
+    foreach(QString filename, shits) {
+        ui->listWidget->addItem(filename.remove(".txt"));
+    }
+    ui->listWidget->setFocus();
+}
+
+void MainWindow::loadTextEditor(std::string filename)
 {
     ui->widget->hide();
-    auto textEditor = new QTextEdit();
-    textEditor->setLineWrapMode(QTextEdit::LineWrapMode::NoWrap);
-    textEditor->setFrameShape(QTextEdit::NoFrame);
-    textEditor->setStyleSheet("background: rgb(234, 234, 234)");
-    textEditor->setFont (QFont ("Arial", 10));
-    ui->centralwidget->layout()->addWidget(textEditor);
-    m_textEditor = textEditor;
+    m_textEditor->openFile(filename + ".txt");
+    m_textEditor->show();
+    m_textEditor->setFocus();
 }
 
 
 
 void MainWindow::on_close_pushButton_clicked()
 {
-      this->close();
+    m_textEditor->closeFile();
+    this->close();
 }
 
 void MainWindow::on_tri_pushButton_clicked()
@@ -81,14 +104,6 @@ void MainWindow::on_tri_pushButton_clicked()
     setWindowState(Qt::WindowState::WindowMinimized);
 }
 
-void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
-{
-    loadTextEditor();
-    auto name = item->text();
-    std::ifstream fin(std::string("data/") + name.toStdString());
-    auto content = std::string(std::istreambuf_iterator<char>(fin), std::istreambuf_iterator<char>());
-    m_textEditor->setText(content.c_str());
-}
 
 void MainWindow::on_topHint_pushButton_clicked()
 {
@@ -109,15 +124,64 @@ void MainWindow::on_createNew_pushButton_clicked()
     auto fileName = QInputDialog::getText(this, tr("New sheet"), tr("Name:"), QLineEdit::Normal, nullptr, &ok);
     if (ok && !fileName.isEmpty()){
 
-        loadTextEditor();
+        loadTextEditor(fileName.toStdString());
     }
 
 }
 
 void MainWindow::on_home_pushButton_clicked()
 {
-    if (m_textEditor) {
+    if (m_textEditor->isVisible()) {
         m_textEditor->hide();
+        m_textEditor->closeFile();
         ui->widget->show();
+        updateList();
     }
+}
+
+void MainWindow::keyEsc_pressed()
+{
+    on_home_pushButton_clicked();
+}
+
+void MainWindow::keyDel_pressed()
+{
+    if (!ui->listWidget->selectedItems().empty()){
+    QMessageBox::StandardButton reply;
+      reply = QMessageBox::question(this, "Submit", "Rly delete?",
+                                    QMessageBox::Yes|QMessageBox::No);
+      if (reply == QMessageBox::Yes) {
+
+
+      } else {
+
+      }
+    }
+}
+
+void MainWindow::timer_shot()
+{
+    ui->listWidget->setFocus();
+}
+
+void MainWindow::on_rename_pushButton_clicked()
+{
+    if(!ui->listWidget->selectedItems().empty()) {
+        bool ok;
+        auto fileName = QInputDialog::getText(this, tr("Rename"), tr("Name:"), QLineEdit::Normal, nullptr, &ok);
+        if (ok) {
+            QFile file("data/" + ui->listWidget->selectedItems().front()->text() + ".txt");
+            file.open(QIODevice::WriteOnly | QIODevice::Text);
+            file.rename("data/" + fileName + ".txt");
+            file.close();
+            updateList();
+            ui->listWidget->setCurrentItem(ui->listWidget->findItems(fileName, Qt::MatchExactly).front());
+        }
+    }
+}
+
+
+void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    loadTextEditor(item->text().toStdString());
 }
