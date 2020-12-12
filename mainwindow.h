@@ -5,6 +5,7 @@
 
 class QListWidgetItem;
 class SafeTextEditor;
+class Search;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,8 +28,12 @@ private:
     QPoint startPos;
     bool mousePressed;
     SafeTextEditor *m_textEditor;
+    Search *m_search;
     QShortcut *keyEsc;
     QShortcut *keyDel;
+    QShortcut *keyEnter;
+    QShortcut *keyCtrlN;
+    QShortcut *keyCtrlF;
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
@@ -47,8 +52,11 @@ private slots:
     void on_home_pushButton_clicked();
     void keyEsc_pressed();
     void keyDel_pressed();
+    void keyEnter_pressed();
     void timer_shot();
     void on_rename_pushButton_clicked();
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+    void on_delete_pushButton_clicked();
+    void on_search_pushButton_clicked();
 };
 #endif // MAINWINDOW_H

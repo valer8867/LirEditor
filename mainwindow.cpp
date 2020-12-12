@@ -9,11 +9,14 @@
 #include <QShortcut>
 #include <QTimer>
 #include <QMessageBox>
+#include <QSizePolicy>
 
 #include <iostream>
 #include <fstream>
 
 #include "safetexteditor.h"
+#include "search.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,7 +28,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_textEditor = new SafeTextEditor();
     m_textEditor->hide();
     ui->centralwidget->layout()->addWidget(m_textEditor);
-
+    m_search = new Search();
+    m_search->hide();
+    ui->centralwidget->layout()->addWidget(m_search);
     updateList();
 
     keyEsc = new QShortcut(this);
@@ -35,6 +40,18 @@ MainWindow::MainWindow(QWidget *parent)
     keyDel = new QShortcut(this);
     keyDel->setKey(Qt::Key_Delete);
     connect(keyDel, &QShortcut::activated, this, &MainWindow::keyDel_pressed);
+
+    keyEnter = new QShortcut(this);
+    keyEnter->setKey(Qt::Key_Return);
+    connect(keyEnter, &QShortcut::activated, this, &MainWindow::keyEnter_pressed);
+
+    keyCtrlN = new QShortcut(this);
+    keyCtrlN->setKey(Qt::CTRL + Qt::Key_N);
+    connect(keyCtrlN, &QShortcut::activated, this, &MainWindow::on_createNew_pushButton_clicked);
+
+    keyCtrlF = new QShortcut(this);
+    keyCtrlF->setKey(Qt::CTRL + Qt::Key_F);
+    connect(keyCtrlF, &QShortcut::activated, this, &MainWindow::on_search_pushButton_clicked);
 
 
     QTimer::singleShot(1000, this, &MainWindow::timer_shot);
@@ -120,6 +137,7 @@ void MainWindow::on_topHint_pushButton_clicked()
 
 void MainWindow::on_createNew_pushButton_clicked()
 {
+
     bool ok;
     auto fileName = QInputDialog::getText(this, tr("New sheet"), tr("Name:"), QLineEdit::Normal, nullptr, &ok);
     if (ok && !fileName.isEmpty()){
@@ -135,6 +153,7 @@ void MainWindow::on_home_pushButton_clicked()
         m_textEditor->hide();
         m_textEditor->closeFile();
         ui->widget->show();
+        m_search->hide();
         updateList();
     }
 }
@@ -146,16 +165,13 @@ void MainWindow::keyEsc_pressed()
 
 void MainWindow::keyDel_pressed()
 {
-    if (!ui->listWidget->selectedItems().empty()){
-    QMessageBox::StandardButton reply;
-      reply = QMessageBox::question(this, "Submit", "Rly delete?",
-                                    QMessageBox::Yes|QMessageBox::No);
-      if (reply == QMessageBox::Yes) {
+    on_delete_pushButton_clicked();
+}
 
-
-      } else {
-
-      }
+void MainWindow::keyEnter_pressed()
+{
+    if(!ui->listWidget->selectedItems().empty()) {
+        on_listWidget_itemDoubleClicked(ui->listWidget->selectedItems().front());
     }
 }
 
@@ -184,4 +200,32 @@ void MainWindow::on_rename_pushButton_clicked()
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     loadTextEditor(item->text().toStdString());
+}
+
+void MainWindow::on_delete_pushButton_clicked()
+{
+
+    if(!ui->listWidget->selectedItems().empty()) {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Remove", "Are you sure?",
+                                      QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
+            QFile file("data/" + ui->listWidget->selectedItems().front()->text() + ".txt");
+            file.remove();
+            updateList();
+        }
+
+    }
+}
+
+void MainWindow::on_search_pushButton_clicked()
+{
+    if (m_textEditor->isHidden()) return;
+    if (m_search->isHidden()) {
+        m_search->show();
+        m_search->m_setFocus();
+    }
+    else {
+        m_search->hide();
+    }
 }

@@ -4,4 +4,7 @@
         <file alias="pin_icon">resources/icons/pin.png</file>
         <file alias="home_icon">resources/icons/home.png</file>
     </qresource>
+    <qresource prefix="/dictionaries">
+        <file alias="dictv0.1">resources/dictionaries/dictionare_v0.1.txt</file>
+    </qresource>
 </RCC>
