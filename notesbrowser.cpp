@@ -32,6 +32,7 @@ void NotesBrowser::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     QMdiSubWindow *mdisubwindow = new QMdiSubWindow();
     ui->mdiArea->addSubWindow(mdisubwindow);
+    mdisubwindow->setWindowTitle(item->text());
     auto textBrowser = new QTextBrowser();
     textBrowser->setText(notes[item->text().toStdString()].c_str());
     mdisubwindow->setWidget(textBrowser);

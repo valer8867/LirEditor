@@ -2,92 +2,66 @@
 
 ### Prepared by Novitski Valery
 
+# Introduction
+## Purpose
 
-# 1.Introduction
+The purpose of the LirEditor Software Requirements Specification is to provide a clear and consistent vision of the LirEditor and to list all the software requirements for it.
 
-## 1.1 Purpose
+This document is intended to ensure a common understanding of the software goals and tasks both by client and developers. 
 
-This SRS describes the software functional and nonfunctional requirements for LibEditor. his document is intended to be used by developers who will implement and verify the correct functioning of the system.
-
-## 1.2 Project Scope
-
-The LibEditor will help users to work with big amounts of small texts.
-
-## 1.3 References
-
+The document is to be continuously updated to reflect the functionality changes that happen during the implementation of the Audit Ordering System Project, so that an accurate vision of what's been done is available at any time. 
   
 
-# 2. Overall Description
+# 1. Overall Description
 
-## 2.1 Product Perspective
+## 1.1 Product Perspective
 
-LirEditor is an attempt to create a convenient text editor for lyrics. Anyway it is only a prototype. Maybe is will become a step to something solid.
+LirEditor is an attempt to create a convenient text editor for lyrics. Anyway it is only a prototype. Maybe it will become a step to something solid.
 
-## 2.2 User Classes and Characteristics
+## 1.2 User Classes and Characteristics
 
-One user class – user.
+One user class â€“ user.
 
-## 2.3 Operating Environment
+## 1.3 Operating Environment
 
-Windows/Linux.
+Windows 7 or later
+Linux with GCC 5. 
 
-## 2.4 Design and Implementation Constraints
+# 2. System Requirements
 
-_C++ core. Qt Gui._
+##### 2.1 Common functions of any text editor
+- copy/paste
+- select all
+- others
 
-## 2.5 User Documentation
+![](https://github.com/valer8867/LirEditor/blob/master/editor.jpg)
 
-Manual.
+##### 2.2 Multi-document interface for viewer.
+- create viewer
+- use mlti-document interface
 
-## 2.6 Assumptions and Dependencies
+![](https://github.com/valer8867/LirEditor/blob/master/menu.jpg)
+![](https://github.com/valer8867/LirEditor/blob/master/browser.jpg)
 
-  
+##### 2.3 An algorithm based on user text input with GUI
+- GUI forms
+- a fast enough algoithm
+- database for algorithm
 
-# 3. System Features
+![](https://github.com/valer8867/LirEditor/blob/master/search.jpg)
 
-## **3.1 Like TextEditor**
- 
+##### 2.4 Autosaving
 
-## 3.2 System Feature 2
+# 3. External Interface Requirements
 
-# 4. External Interface Requirements
+## 3.1 Software Interfaces
 
-## 4.1 User Interfaces
+Application development using Qt/C++ framework.
 
-_A text editor interfaces._
+## 3.2 User Interfaces
 
-## 4.2 Hardware Interfaces
+For user interface design, common GUI standards will be followed along with the presence of keyboard shortcuts, standard buttons and functions.
 
-No hardware interfaces have been identified.
 
-## 4.3 Software Interfaces
 
-_Some cross-class communication._
 
-## 4.4 Communications Interfaces
-
-_No communication interfaces have been identified._
-
-# 5. Other Nonfunctional Requirements
-
-## 5.1 Performance Requirements
-
-Minimal perfomance requirements.
-
-## 5.2 Safety Requirements
-
-No safety requirements have been identified.
-
-## 5.3 Security Requirements
-
-Local program. Security depends on users.
-
-## 5.4 Software Quality Attributes
-
-Performance.
-
-Robustness.
-
-  
-
-# 6. Other Requirements
