@@ -20,6 +20,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     mylistwidget.cpp \
+    notesbrowser.cpp \
     safetexteditor.cpp \
     search.cpp \
     tools.cpp
@@ -28,6 +29,7 @@ HEADERS += \
     crafttable.h \
     mainwindow.h \
     mylistwidget.h \
+    notesbrowser.h \
     safetexteditor.h \
     search.h \
     tools.h
@@ -35,6 +37,7 @@ HEADERS += \
 FORMS += \
     crafttable.ui \
     mainwindow.ui \
+    notesbrowser.ui \
     search.ui \
     tools.ui
 

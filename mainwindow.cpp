@@ -16,6 +16,7 @@
 
 #include "safetexteditor.h"
 #include "search.h"
+#include "notesbrowser.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -32,6 +33,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_search->hide();
     ui->centralwidget->layout()->addWidget(m_search);
     updateList();
+    m_browser = new NotesBrowser(this);
+
+
 
     keyEsc = new QShortcut(this);
     keyEsc->setKey(Qt::Key_Escape);
@@ -233,7 +237,20 @@ void MainWindow::on_search_pushButton_clicked()
     }
 }
 
-void MainWindow::on_listWidget_itemEntered(QListWidgetItem *item)
+void MainWindow::on_listWidget_itemEntered(QListWidgetItem *)
 {
+// //////
+}
+
+
+
+void MainWindow::on_browser_pushButton_clicked()
+{
+    if (m_browser->isHidden()) {
+        m_browser->show();
+    }
+    else {
+        m_browser->hide();
+    }
 
 }

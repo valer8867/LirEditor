@@ -131,6 +131,13 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="browser_pushButton">
+        <property name="text">
+         <string>Browser</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="topHint_pushButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">

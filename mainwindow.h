@@ -12,6 +12,7 @@ namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 class QShotcut;
+class NotesBrowser;
 
 class MainWindow : public QMainWindow
 {
@@ -29,6 +30,7 @@ private:
     bool mousePressed;
     SafeTextEditor *m_textEditor;
     Search *m_search;
+    NotesBrowser *m_browser;
     QShortcut *keyEsc;
     QShortcut *keyDel;
     QShortcut *keyEnter;
@@ -59,5 +61,6 @@ private slots:
     void on_delete_pushButton_clicked();
     void on_search_pushButton_clicked();
     void on_listWidget_itemEntered(QListWidgetItem *item);
+    void on_browser_pushButton_clicked();
 };
 #endif // MAINWINDOW_H
