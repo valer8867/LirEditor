@@ -41,16 +41,17 @@ void Search::on_pushButton_clicked()
     if(ui->lineEdit->text().isEmpty()) return;
     ui->textBrowser->clear();
 
-    std::string tmp = ui->lineEdit->text().toStdString();
+    std::string srchWord = ui->lineEdit->text().toStdString();
     std::string word;
     std::string pattern;
+    std::string result;
     char c;
     for (auto &item : m_words) {
-        pattern = tmp;
+        pattern = srchWord;
         word = item;
         while(true) {
             if (pattern.empty())  {
-                ui->textBrowser->append(item.c_str());
+                result += item + "\n";
                 break;
             }
             c = pattern.back();
@@ -60,8 +61,21 @@ void Search::on_pushButton_clicked()
                 word.erase(it);
             }
             else break;
-
         }
 
     }
+     ui->textBrowser->append(result.c_str());
+
+}
+
+void Search::on_lineEdit_returnPressed()
+{
+    on_pushButton_clicked();
+    ui->lineEdit->setFocus();
+}
+
+void Search::on_pushButton_2_clicked()
+{
+    QWidget *wdg = new QWidget;
+    wdg->show();
 }

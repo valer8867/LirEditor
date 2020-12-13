@@ -58,5 +58,6 @@ private slots:
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
     void on_delete_pushButton_clicked();
     void on_search_pushButton_clicked();
+    void on_listWidget_itemEntered(QListWidgetItem *item);
 };
 #endif // MAINWINDOW_H

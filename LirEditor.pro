@@ -21,19 +21,22 @@ SOURCES += \
     mainwindow.cpp \
     mylistwidget.cpp \
     safetexteditor.cpp \
-    search.cpp
+    search.cpp \
+    tools.cpp
 
 HEADERS += \
     crafttable.h \
     mainwindow.h \
     mylistwidget.h \
     safetexteditor.h \
-    search.h
+    search.h \
+    tools.h
 
 FORMS += \
     crafttable.ui \
     mainwindow.ui \
-    search.ui
+    search.ui \
+    tools.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

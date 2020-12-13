@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
     keyEnter->setKey(Qt::Key_Return);
     connect(keyEnter, &QShortcut::activated, this, &MainWindow::keyEnter_pressed);
 
+
     keyCtrlN = new QShortcut(this);
     keyCtrlN->setKey(Qt::CTRL + Qt::Key_N);
     connect(keyCtrlN, &QShortcut::activated, this, &MainWindow::on_createNew_pushButton_clicked);
@@ -106,6 +107,7 @@ void MainWindow::loadTextEditor(std::string filename)
     m_textEditor->openFile(filename + ".txt");
     m_textEditor->show();
     m_textEditor->setFocus();
+    keyEnter->setEnabled(false);
 }
 
 
@@ -155,6 +157,7 @@ void MainWindow::on_home_pushButton_clicked()
         ui->widget->show();
         m_search->hide();
         updateList();
+        keyEnter->setEnabled(true);
     }
 }
 
@@ -228,4 +231,9 @@ void MainWindow::on_search_pushButton_clicked()
     else {
         m_search->hide();
     }
+}
+
+void MainWindow::on_listWidget_itemEntered(QListWidgetItem *item)
+{
+
 }
