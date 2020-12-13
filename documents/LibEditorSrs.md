@@ -34,21 +34,21 @@ Linux with GCC 5.
 - select all
 - others
 
-![](https://github.com/valer8867/LirEditor/blob/master/editor.jpg)
+![](https://github.com/valer8867/LirEditor/blob/master/documents/editor.jpg)
 
 ##### 2.2 Multi-document interface for viewer.
 - create viewer
 - use mlti-document interface
 
-![](https://github.com/valer8867/LirEditor/blob/master/menu.jpg)
-![](https://github.com/valer8867/LirEditor/blob/master/browser.jpg)
+![](https://github.com/valer8867/LirEditor/blob/master/documents/menu.jpg)
+![](https://github.com/valer8867/LirEditor/blob/master/documents/browser.jpg)
 
 ##### 2.3 An algorithm based on user text input with GUI
 - GUI forms
 - a fast enough algoithm
 - database for algorithm
 
-![](https://github.com/valer8867/LirEditor/blob/master/search.jpg)
+![](https://github.com/valer8867/LirEditor/blob/master/documents/search.jpg)
 
 ##### 2.4 Autosaving
 
