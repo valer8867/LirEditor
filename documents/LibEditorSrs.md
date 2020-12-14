@@ -34,21 +34,14 @@ Linux with GCC 5.
 - select all
 - others
 
-![](https://github.com/valer8867/LirEditor/blob/master/documents/editor.jpg)
-
 ##### 2.2 Multi-document interface for viewer.
 - create viewer
 - use mlti-document interface
-
-![](https://github.com/valer8867/LirEditor/blob/master/documents/menu.jpg)
-![](https://github.com/valer8867/LirEditor/blob/master/documents/browser.jpg)
 
 ##### 2.3 An algorithm based on user text input with GUI
 - GUI forms
 - a fast enough algoithm
 - database for algorithm
-
-![](https://github.com/valer8867/LirEditor/blob/master/documents/search.jpg)
 
 ##### 2.4 Autosaving
 
@@ -62,6 +55,20 @@ Application development using Qt/C++ framework.
 
 For user interface design, common GUI standards will be followed along with the presence of keyboard shortcuts, standard buttons and functions.
 
+- Main menu
 
+![](https://github.com/valer8867/LirEditor/blob/master/documents/menu.jpg)
+
+- Text editing
+
+![](https://github.com/valer8867/LirEditor/blob/master/documents/editor.jpg)
+
+- Document viewing
+
+![](https://github.com/valer8867/LirEditor/blob/master/documents/browser.jpg)
+
+- Searching
+
+![](https://github.com/valer8867/LirEditor/blob/master/documents/search.jpg)
 
 
