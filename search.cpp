@@ -76,6 +76,5 @@ void Search::on_lineEdit_returnPressed()
 
 void Search::on_pushButton_2_clicked()
 {
-    QWidget *wdg = new QWidget;
-    wdg->show();
+    ////////
 }

@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->centralwidget->layout()->addWidget(m_search);
     updateList();
     m_browser = new NotesBrowser(this);
-
+    m_browser->setWindowTitle("Browse");
 
 
     keyEsc = new QShortcut(this);
