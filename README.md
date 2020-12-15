@@ -9,10 +9,18 @@ Qt Community license
 
 ## Screenshots
 
-![Main Menu](https://github.com/valer8867/LirEditor/blob/master/documents/scMainMenu.png)
+### Main Menu
 
-![Browser](https://github.com/valer8867/LirEditor/blob/master/documents/scBrowser.png)
+![](https://github.com/valer8867/LirEditor/blob/master/documents/scMainMenu.png)
 
-![Text Editor](https://github.com/valer8867/LirEditor/blob/master/documents/scTextEditor.png)
+### Browser
 
-![Search](https://github.com/valer8867/LirEditor/blob/master/documents/scSearch.png)
+![](https://github.com/valer8867/LirEditor/blob/master/documents/scBrowser.png)
+
+### Text Editor
+
+![](https://github.com/valer8867/LirEditor/blob/master/documents/scTextEditor.png)
+
+### Search
+
+![](https://github.com/valer8867/LirEditor/blob/master/documents/scSearch.png)
